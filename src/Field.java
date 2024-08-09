@@ -1,14 +1,12 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Set;
 import java.util.HashSet;
 
-public class Campo extends JFrame implements KeyListener {
+public class Field extends JFrame implements KeyListener {
     JLabel label;
     JLabel label2;
     Ball ball;
@@ -17,7 +15,7 @@ public class Campo extends JFrame implements KeyListener {
     JLabel scoreLabel;
     Timer timer;
 
-    public Campo() {
+    public Field() {
         setTitle("Pong Game");
         setSize(1080, 720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -109,35 +107,7 @@ public class Campo extends JFrame implements KeyListener {
         endGamePanel.setBackground(Color.BLACK);
         endGamePanel.setBorder(new EmptyBorder(120, 120, 120, 120));
 
-        JButton retryButton = new JButton("Retry");
-        retryButton.setFont(new Font("Arial", Font.BOLD, 40));
-        retryButton.setBackground(Color.WHITE);
-        retryButton.setOpaque(true);
-        retryButton.setFocusPainted(false);
-        retryButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Campo();
-                dispose();
-            }
-        });
-
-        JButton exitButton = new JButton("Exit");
-        exitButton.setFont(new Font("Arial", Font.BOLD, 40));
-        exitButton.setBackground(Color.WHITE);
-        exitButton.setOpaque(true);
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
-
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(1, 2, 50, 50));
-        buttonPanel.setBackground(Color.BLACK);
-        buttonPanel.add(retryButton);
-        buttonPanel.add(exitButton);
+        JPanel buttonPanel = getjPanel();
 
 
         endGamePanel.add(pScreen, BorderLayout.NORTH);
@@ -149,10 +119,30 @@ public class Campo extends JFrame implements KeyListener {
         repaint();
     }
 
+    private JPanel getjPanel() {
+        JButton retryButton = new JButton("Retry");
+        retryButton.setFont(new Font("Arial", Font.BOLD, 40));
+        retryButton.setBackground(Color.WHITE);
+        retryButton.setOpaque(true);
+        retryButton.setFocusPainted(false);
+        retryButton.addActionListener(e -> {
+            new Field();
+            dispose();
+        });
 
+        JButton exitButton = new JButton("Exit");
+        exitButton.setFont(new Font("Arial", Font.BOLD, 40));
+        exitButton.setBackground(Color.WHITE);
+        exitButton.setOpaque(true);
+        exitButton.addActionListener(e -> System.exit(0));
 
-
-
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridLayout(1, 2, 50, 50));
+        buttonPanel.setBackground(Color.BLACK);
+        buttonPanel.add(retryButton);
+        buttonPanel.add(exitButton);
+        return buttonPanel;
+    }
 
 
     private void updatePositions() {
@@ -193,7 +183,7 @@ public class Campo extends JFrame implements KeyListener {
         pressedKeys.remove(e.getKeyCode());
     }
 
-    private class CustomPanel extends JPanel {
+    private static class CustomPanel extends JPanel {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -213,6 +203,6 @@ public class Campo extends JFrame implements KeyListener {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(Campo::new);
+        SwingUtilities.invokeLater(Field::new);
     }
 }

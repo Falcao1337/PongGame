@@ -1,8 +1,6 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MainMenu extends JFrame {
     public MainMenu() {
@@ -22,24 +20,16 @@ public class MainMenu extends JFrame {
         startButton.setBackground(Color.WHITE);
         startButton.setOpaque(true);
         startButton.setFocusPainted(false);
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Campo();
-                dispose();
-            }
+        startButton.addActionListener(e -> {
+            new Field();
+            dispose();
         });
 
         JButton exitButton = new JButton("Exit");
         exitButton.setFont(new Font("Arial", Font.BOLD, 40));
         exitButton.setBackground(Color.WHITE);
         exitButton.setOpaque(true);
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        exitButton.addActionListener(e -> System.exit(0));
 
         panel.add(startButton);
         panel.add(exitButton);

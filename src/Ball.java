@@ -1,27 +1,24 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
-import java.util.Timer;
-
 
 class Ball extends JLabel {
     private int xVelocity = 5;
     private int yVelocity = 5;
-    private JLabel paddle1;
-    private JLabel paddle2;
-    private Random random = new Random();
+    private final JLabel paddle1;
+    private final JLabel paddle2;
+    private final Random random = new Random();
     public int player1;
     public int player2;
-    public Campo campo;
-    Timer timer = new Timer();
+    public Field field;
 
 
 
-    public Ball(JLabel paddle1, JLabel paddle2, Campo campo) {
+    public Ball(JLabel paddle1, JLabel paddle2, Field field) {
         this.paddle1 = paddle1;
         this.paddle2 = paddle2;
         setInitialPositionAndVelocity();
-        this.campo = campo;
+        this.field = field;
     }
 
 
@@ -57,12 +54,12 @@ class Ball extends JLabel {
 
         if (bounds.x == 0) {
             player2++;
-            campo.updateScore();
-            campo.updateBallPosition();
+            field.updateScore();
+            field.updateBallPosition();
         } else if (bounds.x == 1080) {
             player1++;
-            campo.updateScore();
-            campo.updateBallPosition();
+            field.updateScore();
+            field.updateBallPosition();
         }
         if (bounds.y < 10 || bounds.y > 660) {
             yVelocity = -yVelocity;
