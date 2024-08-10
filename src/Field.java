@@ -196,13 +196,9 @@ public class Field extends JFrame implements KeyListener {
                 g2d.drawLine(540, i, 540, i + segmentLength);
             }
 
-            g2d.drawLine(0,676, 1080, 676);
-            g2d.drawLine(0,5, 1080, 5);
+            g2d.drawLine(0, 676, 1080, 676);
+            g2d.drawLine(0, 5, 1080, 5);
 
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(Field::new);
     }
 }
